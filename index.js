@@ -1,4 +1,4 @@
-window.onload = function(){
+//window.onload = function(){
 
 var form = document.querySelector("form");
 var input = document.querySelector("#task-input");
@@ -8,9 +8,18 @@ var search = document.getElementById("search-input");
     let err = document.querySelector("#err");
     let div = document.getElementById("div");
 var li = document.createElement("li");
+    
+
     // all event loader
     const allEventLoader = function() {
-    
+        
+        // Dom load event
+        document.addEventListener("DOMContentLoaded", getTasks);
+        document.body.addEventListener("click", function(){
+                      err.innerText = ''
+                      input.style.borderBottomColor = "#aaa";
+                      });
+        
     // form event
     form.addEventListener("submit", addTask);
         
@@ -23,6 +32,37 @@ var li = document.createElement("li");
     // search task event    
     search.addEventListener("keyup", searchTask);
     };
+    
+    function getTasks(){
+        var tasks;
+            if(localStorage.getItem("tasks") === null){
+                tasks = [];
+            }
+            else{
+                tasks = JSON.parse(localStorage.getItem("tasks"));
+            }
+//            tasks.push(task);
+//            localStorage.setItem("tasks", JSON.stringify(tasks));
+        tasks.forEach(function(task){
+            
+        err.innerText = "";
+        div.innerText = "";            
+         var a = document.createElement("a");
+         var i = document.createElement("i");
+        var  li = document.createElement("li");
+         li.className = " li";
+         a.href = "#";
+         a.className = " a";
+         i.className = " fa fa-trash";
+         
+         a.appendChild(i);
+         li.appendChild(document.createTextNode(task));
+         li.append(a);
+         
+         ol.appendChild(li);
+        delAll.style.display = "block";
+        });
+    }
     
     
     // Form Submittion
@@ -43,28 +83,16 @@ var li = document.createElement("li");
             input.onfocus = () => {
                 err.style.display = "none";
                 input.style.borderBottomColor = "#aaa";
-                document.getElementById(("add-button")).style.display = "block";
+                document.getElementById("add-button").style.display = "block";
             }
         }
             // if no error then trim whitespaces and add task if specified
      else if(input.value.trim()){
-//         let inp = input.value;
-//         let tasks;
-//            if(localStorage.getItem("tasks") === null){
-//                tasks = [];
-//            }else{
-//                tasks = JSON.parse(localStorage.getItem("tasks"));
-//                
-//            }
-//                tasks.push(inp);
-//                 
-//        localStorage.setItem("tasks",JSON.stringify(tasks));
-//         
-//         var store = JSON.parse(localStorage.getItem("tasks")); store.forEach(t => {
-         input.style.borderBottomColor = "#aaa";
+
+//         input.style.borderBottomColor = "#aaa";
         err.innerText = "";
         div.innerText = "";
-//        alert(" Successfully Added"); 
+        alert(" Successfully Added"); 
          
         
          var a = document.createElement("a");
@@ -75,28 +103,55 @@ var li = document.createElement("li");
          a.className = " a";
          i.className = " fa fa-trash";
          
-         a.appendChild(i)
+         a.appendChild(i);
          li.appendChild(document.createTextNode(input.value));
          li.append(a);
          
          ol.appendChild(li);
         input.blur();
         delAll.style.display = "block";
-         console.log(li);
-//        console.log(t)
-         //})
+         
+         // store in local storage
+        
      }
+         storeInLocalStorage(input.value);
+
+        
         this.reset();
     }; // form event closed
+    
+        
+        var storeInLocalStorage = task => {
+            var tasks;
+            if(localStorage.getItem("tasks") === null){
+                if(input.value === ""){
+                    
+                }else{
+                tasks = [];
+            }
+            }else{
+                tasks = JSON.parse(localStorage.getItem("tasks"));
+            }
+            if(input.value === ""){
+                
+            }else{
+                tasks.push(task);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+                 }
+        }
+    
+    
     
     // delete task icon
      const deleteTask = function(e){
         e.preventDefault();
-        console.log(e.target);
+        
         if(e.target.parentElement.classList.contains("a")){
             if(confirm("Are you sure?")){
            e.target.parentElement.parentElement.remove();
-            console.log(e.target.className);
+            
+                deleteFromLs(e.target.parentElement.parentElement);
+                console.log(e.target.parentElement.parentElement);
             }else{
                 alert("Access Denied.");
             };
@@ -110,6 +165,25 @@ var li = document.createElement("li");
         }
      };
      
+function deleteFromLs(item){
+    var tasks;
+            if(localStorage.getItem("tasks") === null){
+                tasks = [];
+            }
+            else{
+                tasks = JSON.parse(localStorage.getItem("tasks"));
+            }
+        tasks.forEach(function(task, index){
+            if(item.textContent === task){
+                tasks.splice(index, 1);
+                
+            }else{
+                console.err("nothing to do");
+            }
+        });
+    localStorage.setItem("task", JSON.stringify(tasks));
+};
+
 
     if(ol.childElementCount == 0){
         div.style.color = "#aaa";
@@ -128,7 +202,7 @@ var li = document.createElement("li");
         e.preventDefault();
         while(ol.firstElementChild){
             ol.removeChild(ol.firstElementChild);
-        
+            localStorage.clear();
             }
                 delAll.style.display = "none";
                div.innerText = "All task has been cleared, you can add new task in the \"New Task\" filled";
@@ -156,7 +230,7 @@ var li = document.createElement("li");
     
       
 
-}; // End window.Onload()
+//}; // End window.Onload()
 
 
 const sideBar = document.createElement("div");
@@ -196,7 +270,7 @@ let imgDiv = document.createElement("div");
 
 let hr = document.createElement("hr");
 let img = document.createElement("img");
-        img.src = "../projects/images/author.jpg";
+        img.src = "../images/author.jpg";
         img.alt = "author's pic";
         img.style.width = "20%";
         img.style.marginBottom = "-3%";
@@ -296,7 +370,7 @@ checkbox.addEventListener("click", function(e){
     if(e.target.className.includes("bg")){    
         var main = document.querySelector("main");
         var body = document.querySelector("body"); 
-        body.style.backgroundImage = "url(../projects/images/wp-1.jpg)";
+        body.style.backgroundImage = "url(../images/wp-1.jpg)";
         body.style.fontFamily = "serif";
         main.style.fontFamily = "mono space"
         this.blur();
@@ -314,7 +388,7 @@ checkbox1.addEventListener("click", function(e){
     var main = document.querySelector("main");
     if(e.target.className.includes("bg1")){
         
-        body.style.backgroundImage = "url(../projects/images/wp-2.jpg)";
+        body.style.backgroundImage = "url(../images/wp-2.jpg)";
         main.style.fontFamily = "cursive, serif";
         
         this.blur();
