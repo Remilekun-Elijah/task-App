@@ -151,7 +151,7 @@ var li = document.createElement("li");
            e.target.parentElement.parentElement.remove();
             
                 deleteFromLs(e.target.parentElement.parentElement);
-                console.log(e.target.parentElement.parentElement);
+//                console.log(e.target.parentElement.parentElement);
             }else{
                 alert("Access Denied.");
             };
@@ -161,11 +161,11 @@ var li = document.createElement("li");
                 delAll.style.display = "none";
             }else{
             delAll.style.display = "block";
-            };
+            }
         }
      };
      
-function deleteFromLs(item){
+function deleteFromLs(items){
     var tasks;
             if(localStorage.getItem("tasks") === null){
                 tasks = [];
@@ -174,13 +174,13 @@ function deleteFromLs(item){
                 tasks = JSON.parse(localStorage.getItem("tasks"));
             }
         tasks.forEach(function(task, index){
-            if(item.textContent === task){
+            if(items.textContent === task){
                 tasks.splice(index, 1);
                 
             }else{
                 console.err("nothing to do");
             }
-        });
+        })
     localStorage.setItem("task", JSON.stringify(tasks));
 };
 
