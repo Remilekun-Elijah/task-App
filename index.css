@@ -4,7 +4,7 @@ body{
         display: -webkit-box;
         -webkit-box-pack: center;
         margin-top: 4vh;
-        background-image: url(../projects/images/wp-1.jpg);
+        background-image: url("images/wp-1.jpg");
         background-attachment: fixed;
         background-position:left;
         background-size: cover;

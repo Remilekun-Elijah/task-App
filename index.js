@@ -270,7 +270,7 @@ let imgDiv = document.createElement("div");
 
 let hr = document.createElement("hr");
 let img = document.createElement("img");
-        img.src = "../images/author.jpg";
+        img.src = "images/author.jpg";
         img.alt = "author's pic";
         img.style.width = "20%";
         img.style.marginBottom = "-3%";
@@ -370,7 +370,7 @@ checkbox.addEventListener("click", function(e){
     if(e.target.className.includes("bg")){    
         var main = document.querySelector("main");
         var body = document.querySelector("body"); 
-        body.style.backgroundImage = "url(../images/wp-1.jpg)";
+        body.style.backgroundImage = "url(images/wp-1.jpg)";
         body.style.fontFamily = "serif";
         main.style.fontFamily = "mono space"
         this.blur();
@@ -388,7 +388,7 @@ checkbox1.addEventListener("click", function(e){
     var main = document.querySelector("main");
     if(e.target.className.includes("bg1")){
         
-        body.style.backgroundImage = "url(../images/wp-2.jpg)";
+        body.style.backgroundImage = "url(images/wp-2.jpg)";
         main.style.fontFamily = "cursive, serif";
         
         this.blur();
