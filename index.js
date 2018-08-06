@@ -303,8 +303,8 @@ let h2 = document.createElement("h2");
 let ul = document.createElement("ul");
         ul.style.display = "block";
         
-    ul.innerHTML = ` <a href="facebook.com/Remilekun Elijah Jnr" target="_blank" class="link"><li class="fa fa-facebook" style="display: block; order-style:none;"> Facebook </li></a>
-                    <a href="twitter.com/RemilekunElijah" class="link"><li class="fa fa-twitter" style="display: block; border-style:none;"> Twitter </li></a>
+    ul.innerHTML = ` <a href=" facebook.com/Remilekun.elijah.jnr.97" target="_blank" class="link"><li class="fa fa-facebook" style="display: block; order-style:none;"> Facebook </li></a>
+                    <a href="/twitter.com/RemilekunElijah" class="link"><li class="fa fa-twitter" style="display: block; border-style:none;"> Twitter </li></a>
                     <a href="instagram.com/Remilekun-elijah" class="link"><li class="fa fa-instagram" style="display: block; order-style:none;"> Instagram </li></a>`;
 
 let settingsDiv = document.createElement("div");
